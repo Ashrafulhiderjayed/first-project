@@ -9,15 +9,24 @@ export type Guardian = {
     motherContactNo: string;
 };
 
+export type UserName = {
+    firstName: string;
+    middleName?: string;
+    lastName: string;
+}
+
+export type LocalGuardian = {
+    name: string;
+    occupation: string;
+    contactNo: string;
+    address: string;
+}
+
 export type Student = {
     id: string;
-    name: {
-        firstName: string;
-        middleName?: string;
-        lastName: string;
-    },
+    name: UserName,
     gender: "male" | "female"; //union type 
-    dateOfBirth: string; // YYYY-MM-DD format
+    dateOfBirth?: string; // YYYY-MM-DD format
     email: string;
     contactNumber: string;
     emergencyContact: string;
@@ -25,4 +34,7 @@ export type Student = {
     presentAddress: string;
     permanentAddress: string;
     guardian: Guardian;
+    localGuardian?: LocalGuardian;
+    profileImg?: string; // URL to the image
+    isActive: 'active' | 'blocked'; // union type
 }
