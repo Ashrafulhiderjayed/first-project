@@ -1,21 +1,64 @@
 import { Schema, model, connect } from 'mongoose';
-import { Student } from './student/student.interface';
+import { Guardian, LocalGuardian, Student, UserName } from './student/student.interface';
+
+const userNameSchema = new Schema<UserName>({
+  firstName: {
+    type: String, //type from mongoose
+    required: true,
+  },
+  middleName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+});
+
+const guardianSchema = new Schema<Guardian>({
+  fatherName: {
+    type: String,
+    required: true,
+  },
+  fatherOccupation: {
+    type: String,
+  },
+  fatherContactNo: {
+    type: String,
+  },
+  motherName: {
+    type: String,
+  },
+  motherOccupation: {
+    type: String,
+  },
+  motherContactNo: {
+    type: String,
+  },
+})
+
+const localGuardianSchema = new Schema<LocalGuardian>({
+  name: {
+    type: String,
+    // required: true,
+  },
+  occupation: {
+    type: String,
+    // required: true,
+  },
+  contactNo: {
+    type: String,
+    // required: true,
+  },
+  address: {
+    type: String,
+    // required: true,
+  },
+})
 
 const studentSchema = new Schema<Student>({
   id: { type: String },
-  name: {
-    firstName: {
-      type: String, //type from mongoose
-      required: true,
-    },
-    middleName: {
-      type: String,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
-  },
+  name: userNameSchema,
   gender: ['male', 'female'], // mongoose enum
   dateOfBirth: { type: String },
   email: {
@@ -36,50 +79,12 @@ const studentSchema = new Schema<Student>({
     type: String,
     required: true,
   },
-  guardian: {
-    fatherName: {
-      type: String,
-      required: true,
-    },
-    fatherOccupation: {
-      type: String,
-      // required: true,
-    },
-    fatherContactNo: {
-      type: String,
-      // required: true,
-    },
-    motherName: {
-      type: String,
-      // required: true,
-    },
-    motherOccupation: {
-      type: String,
-      // required: true,
-    },
-    motherContactNo: {
-      type: String,
-      // required: true,
-    },
-  },
-  localGuardian: {
-    name: {
-      type: String,
-      // required: true,
-    },
-    occupation: {
-      type: String,
-      // required: true,
-    },
-    contactNo: {
-      type: String,
-      // required: true,
-    },
-    address: {
-      type: String,
-      // required: true,
-    },
-  },
+  guardian: guardianSchema,
+  localGuardian: localGuardianSchema,
   profileImg: { type: String },
   isActive: ['active', 'blocked'], // mongoose enum
 });
+
+
+// creating a model from the schema (Student=model name, studentSchema=schema)
+const Student = model<Student>('Student', studentSchema)
