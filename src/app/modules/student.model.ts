@@ -62,14 +62,17 @@ const localGuardianSchema = new Schema<LocalGuardian>({
 });
 
 const studentSchema = new Schema<Student>({
-  id: { type: String },
+  id: { type: String, required: true, unique: true },
   name: {
     type: userNameSchema,
-    required: true,
+    required: [true, 'First Name is required'],
   },
   gender: {
     type: String,
-    enum: ['male', 'female', 'other'], // mongoose enum
+    enum: {
+      values: ['male', 'female', 'other'],
+      message: "{VALUE} is not supported. Please select 'male', 'female', or 'other'",
+    },
   }, // mongoose enum
   dateOfBirth: { type: String },
   email: {
@@ -106,7 +109,7 @@ const studentSchema = new Schema<Student>({
     type: String,
     enum: ['active', 'inactive'], // mongoose enum
     default: 'active',
-  }
+  },
 });
 
 // creating a model from the schema (Student=model name, studentSchema=schema)
