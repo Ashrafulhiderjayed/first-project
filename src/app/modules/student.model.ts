@@ -1,4 +1,4 @@
-import { Schema, model, connect } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import {
   Guardian,
   LocalGuardian,
@@ -6,111 +6,114 @@ import {
   UserName,
 } from './student/student.interface';
 
+// Schema for user's name
 const userNameSchema = new Schema<UserName>({
   firstName: {
-    type: String, //type from mongoose
-    required: true,
+    type: String,
+    required: [true, 'First name is required'],
   },
   middleName: {
     type: String,
   },
   lastName: {
     type: String,
-    required: true,
+    required: [true, 'Last name is required'],
   },
 });
 
+// Schema for guardian information
 const guardianSchema = new Schema<Guardian>({
   fatherName: {
     type: String,
-    required: true,
+    required: [true, 'Father name is required'],
   },
-  fatherOccupation: {
-    type: String,
-  },
-  fatherContactNo: {
-    type: String,
-  },
-  motherName: {
-    type: String,
-  },
-  motherOccupation: {
-    type: String,
-  },
-  motherContactNo: {
-    type: String,
-  },
+  fatherOccupation: String,
+  fatherContactNo: String,
+  motherName: String,
+  motherOccupation: String,
+  motherContactNo: String,
 });
 
+// Schema for local guardian information
 const localGuardianSchema = new Schema<LocalGuardian>({
   name: {
     type: String,
-    // required: true,
+    required: [true, 'Local guardian name is required'],
   },
   occupation: {
     type: String,
-    // required: true,
+    required: [true, 'Local guardian occupation is required'],
   },
   contactNo: {
     type: String,
-    // required: true,
+    required: [true, 'Local guardian contact number is required'],
   },
   address: {
     type: String,
-    // required: true,
+    required: [true, 'Local guardian address is required'],
   },
 });
 
+// Schema for the student
 const studentSchema = new Schema<Student>({
-  id: { type: String, required: true, unique: true },
+  id: {
+    type: String,
+    required: [true, 'Student ID is required'],
+    unique: true,
+  },
   name: {
     type: userNameSchema,
-    required: [true, 'First Name is required'],
+    required: true,
   },
   gender: {
     type: String,
     enum: {
-      values: ['male', 'female', 'other'],
-      message: "{VALUE} is not supported. Please select 'male', 'female', or 'other'",
+      values: ['male', 'female', 'other'], //mongoose enum
+      message: '{VALUE} is not a valid gender. Choose either male, female, or other.',
     },
-  }, // mongoose enum
-  dateOfBirth: { type: String },
+  },
+  dateOfBirth: String,
   email: {
     type: String,
-    required: true,
-    // unique: true, // unique email
+    required: [true, 'Email is required'],
   },
   contactNumber: {
     type: String,
-    required: true,
+    required: [true, 'Contact number is required'],
   },
   emergencyContact: {
     type: String,
-    required: true,
+    required: [true, 'Emergency contact number is required'],
   },
   bloodGroup: {
     type: String,
-    enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], // mongoose enum
+    enum: {
+      values: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+      message: '{VALUE} is not a valid blood group.',
+    },
   },
   presentAddress: {
     type: String,
-    required: true,
+    required: [true, 'Present address is required'],
   },
   guardian: {
     type: guardianSchema,
-    required: true,
+    required: [true, 'Guardian information is required'],
   },
   localGuardian: {
     type: localGuardianSchema,
-    required: true,
+    required: [true, 'Local guardian information is required'],
   },
-  profileImg: { type: String },
+  profileImg: String,
   isActive: {
     type: String,
-    enum: ['active', 'inactive'], // mongoose enum
+    enum: {
+      values: ['active', 'inactive'],
+      message: '{VALUE} is not valid. Status must be either active or inactive.',
+    },
     default: 'active',
   },
 });
 
-// creating a model from the schema (Student=model name, studentSchema=schema)
+// Create the Student model
 export const StudentModel = model<Student>('Student', studentSchema);
