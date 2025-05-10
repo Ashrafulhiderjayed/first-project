@@ -11,6 +11,15 @@ const userNameSchema = new Schema<UserName>({
   firstName: {
     type: String,
     required: [true, 'First name is required'],
+    trim: true,
+    maxlength: [20, 'First name must be less than 20 characters'],
+    validate: {
+      validator: function (value: string) {
+        const firstNameStr = value.charAt(0).toUpperCase() + value.slice(1);
+        return firstNameStr === value;
+      },
+      message: '{VALUE} is not a valid first name. First letter must be capitalized.',
+    },
   },
   middleName: {
     type: String,
@@ -69,7 +78,8 @@ const studentSchema = new Schema<Student>({
     type: String,
     enum: {
       values: ['male', 'female', 'other'], //mongoose enum
-      message: '{VALUE} is not a valid gender. Choose either male, female, or other.',
+      message:
+        '{VALUE} is not a valid gender. Choose either male, female, or other.',
     },
   },
   dateOfBirth: String,
@@ -109,7 +119,8 @@ const studentSchema = new Schema<Student>({
     type: String,
     enum: {
       values: ['active', 'inactive'],
-      message: '{VALUE} is not valid. Status must be either active or inactive.',
+      message:
+        '{VALUE} is not valid. Status must be either active or inactive.',
     },
     default: 'active',
   },

@@ -16,7 +16,12 @@ const createStudent = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      status: 'false',
+      message: 'Failed to create student',
+      error: error,
+    });
+    // console.log(error);
   }
 };
 
@@ -46,7 +51,11 @@ const getSingleStudent = async (req: Request, res: Response) => {
     });
   }
   catch (error) {
-    console.log(error);
+    res.status(500).json({
+      status: 'false',
+      message: 'Failed to fetch student', 
+      error: error,
+    });
   }
 }
 
