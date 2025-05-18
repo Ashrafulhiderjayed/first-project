@@ -1,14 +1,16 @@
 import { Schema, model } from 'mongoose';
 import validator from 'validator';
 import {
-  Guardian,
-  LocalGuardian,
-  Student,
-  UserName,
+  TGuardian,
+  TLocalGuardian,
+  TStudent,
+  StudentMethods,
+  StudentModel,
+  TUserName,
 } from './student/student.interface';
 
 // Schema for user's name
-const userNameSchema = new Schema<UserName>({
+const userNameSchema = new Schema<TUserName>({
   firstName: {
     type: String,
     required: [true, 'First name is required'],
@@ -38,7 +40,7 @@ const userNameSchema = new Schema<UserName>({
 });
 
 // Schema for guardian information
-const guardianSchema = new Schema<Guardian>({
+const guardianSchema = new Schema<TGuardian>({
   fatherName: {
     type: String,
     required: [true, 'Father name is required'],
@@ -51,7 +53,7 @@ const guardianSchema = new Schema<Guardian>({
 });
 
 // Schema for local guardian information
-const localGuardianSchema = new Schema<LocalGuardian>({
+const localGuardianSchema = new Schema<TLocalGuardian>({
   name: {
     type: String,
     required: [true, 'Local guardian name is required'],
@@ -71,7 +73,7 @@ const localGuardianSchema = new Schema<LocalGuardian>({
 });
 
 // Schema for the student
-const studentSchema = new Schema<Student>({
+const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
   id: {
     type: String,
     required: [true, 'Student ID is required'],
@@ -96,7 +98,7 @@ const studentSchema = new Schema<Student>({
     validate: {
       validator: (value: string) => validator.isEmail(value),
       message: '{VALUE} is not a valid email address.',
-    }
+    },
   },
   contactNumber: {
     type: String,
@@ -138,4 +140,4 @@ const studentSchema = new Schema<Student>({
 });
 
 // Create the Student model
-export const StudentModel = model<Student>('Student', studentSchema);
+export const Student = model<TStudent>('Student', studentSchema);

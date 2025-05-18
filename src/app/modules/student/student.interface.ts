@@ -1,13 +1,13 @@
 import { Schema, model, connect, Model } from 'mongoose';
 
 //these are the sub-types of studentSchema
-export type UserName = {
+export type TUserName = {
   firstName: string;
   middleName?: string;
   lastName: string;
 };
 
-export type Guardian = {
+export type TGuardian = {
   fatherName: string;
   fatherOccupation: string;
   fatherContactNo: string;
@@ -16,16 +16,16 @@ export type Guardian = {
   motherContactNo: string;
 };
 
-export type LocalGuardian = {
+export type TLocalGuardian = {
   name: string;
   occupation: string;
   contactNo: string;
   address: string;
 };
 
-export type Student = {
+export type TStudent = {
   id: string;
-  name: UserName;
+  name: TUserName;
   gender: 'male' | 'female' | 'other'; //union type
   dateOfBirth?: string; // YYYY-MM-DD format
   email: string;
@@ -34,15 +34,18 @@ export type Student = {
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'O-' | 'AB+' | 'AB-'; // union type
   presentAddress: string;
   permanentAddress: string;
-  guardian: Guardian;
-  localGuardian?: LocalGuardian;
+  guardian: TGuardian;
+  localGuardian?: TLocalGuardian;
   profileImg?: string; // URL to the image
   isActive: 'active' | 'blocked'; // union type
 };
 
-
 export type StudentMethods = {
-    isUserExist(id: string): Promise<Student>
-}
+  isUserExist(id: string): Promise<TStudent>;
+};
 
-type StudentModel = Model<Student, Record<string, never>, StudentMethods>;
+export type StudentModel = Model<
+  TStudent,
+  Record<string, never>,
+  StudentMethods
+>;
