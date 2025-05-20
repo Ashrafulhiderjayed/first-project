@@ -2,8 +2,12 @@ import { Student } from '../student.model';
 import { TStudent } from './student.interface';
 
 const createStudentIntoDB = async (studentData: TStudent) => {
-  const result = await Student.create(studentData); //built in static method of mongoose
 
+  if(await Student.isUserExist(studentData.id)){
+    throw new Error('User already exists!')
+  }
+  
+  const result = await Student.create(studentData); //built in static method of mongoose
 
 
   // const student = new Student(studentData); //creating instance of model
