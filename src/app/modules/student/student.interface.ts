@@ -40,12 +40,18 @@ export type TStudent = {
   isActive: 'active' | 'blocked'; // union type
 };
 
-export type StudentMethods = {
+// for creating static method
+export interface StudentModel extends Model<TStudent>{
   isUserExist(id: string): Promise<TStudent | null>;
-};
+}
 
-export type StudentModel = Model<
-  TStudent,
-  Record<string, never>,
-  StudentMethods
->;
+//for creating instance
+// export type StudentMethods = {
+//   isUserExist(id: string): Promise<TStudent | null>;
+// };
+
+// export type StudentModel = Model<
+//   TStudent,
+//   Record<string, never>,
+//   StudentMethods
+// >;
