@@ -1,13 +1,15 @@
 import { Schema, model } from 'mongoose';
 import validator from 'validator';
 import {
+  StudentModel,
   TGuardian,
   TLocalGuardian,
   TStudent,
-  StudentMethods,
-  StudentModel,
+  // StudentMethods,
   TUserName,
 } from './student/student.interface';
+import bcrypt from 'bcrypt';
+import config from '../config';
 
 // Schema for user's name
 const userNameSchema = new Schema<TUserName>({
@@ -73,7 +75,7 @@ const localGuardianSchema = new Schema<TLocalGuardian>({
 });
 
 // Schema for the student
-const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
+const studentSchema = new Schema<TStudent, StudentModel>({
   id: {
     type: String,
     required: [true, 'Student ID is required'],
@@ -144,8 +146,13 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
 });
 
 // pre save middleware/hook : will work on create() and save()
-studentSchema.pre('save', function () {
-  console.log(this, 'pre hook: Student will be saved');
+studentSchema.pre('save', async function (next) {
+  // console.log(this, 'pre hook: Student will be saved');
+  const user = this;
+
+  // hashing password before saving
+  user.password = await bcrypt.hash(user.password, Number(config.bcrypt_salt_rounds));
+  next();
 });
 
 // post save middleware/hook
