@@ -79,6 +79,10 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
     required: [true, 'Student ID is required'],
     unique: true,
   },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+  },
   name: {
     type: userNameSchema,
     required: true,
@@ -139,17 +143,15 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
   },
 });
 
-
 // pre save middleware/hook : will work on create() and save()
-studentSchema.pre('save', function(){
+studentSchema.pre('save', function () {
   console.log(this, 'pre hook: Student will be saved');
-})
+});
 
-// post save middleware/hook 
-studentSchema.post('save', function(){
+// post save middleware/hook
+studentSchema.post('save', function () {
   console.log(this, 'post hook: Student was saved');
-})
-
+});
 
 //creating a custom static method
 studentSchema.statics.isUserExist = async function (id: string) {
