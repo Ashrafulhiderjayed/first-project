@@ -140,12 +140,12 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethods>({
 });
 
 
-// pre save middleware/hook
+// pre save middleware/hook : will work on create() and save()
 studentSchema.pre('save', function(){
   console.log(this, 'pre hook: Student will be saved');
 })
 
-// post save middleware/hook
+// post save middleware/hook 
 studentSchema.post('save', function(){
   console.log(this, 'post hook: Student was saved');
 })
