@@ -145,6 +145,11 @@ studentSchema.pre('save', function(){
   console.log(this, 'pre hook: Student will be saved');
 })
 
+// post save middleware/hook
+studentSchema.post('save', function(){
+  console.log(this, 'post hook: Student was saved');
+})
+
 
 //creating a custom static method
 studentSchema.statics.isUserExist = async function (id: string) {
