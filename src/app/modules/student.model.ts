@@ -148,7 +148,7 @@ const studentSchema = new Schema<TStudent, StudentModel>({
 // pre save middleware/hook : will work on create() and save()
 studentSchema.pre('save', async function (next) {
   // console.log(this, 'pre hook: Student will be saved');
-  const user = this;
+  const user = this;  //doc
 
   // hashing password before saving
   user.password = await bcrypt.hash(user.password, Number(config.bcrypt_salt_rounds));
@@ -156,8 +156,9 @@ studentSchema.pre('save', async function (next) {
 });
 
 // post save middleware/hook
-studentSchema.post('save', function () {
-  console.log(this, 'post hook: Student was saved');
+studentSchema.post('save', function (doc, next) {
+  doc.password = '';
+  next();
 });
 
 //creating a custom static method
