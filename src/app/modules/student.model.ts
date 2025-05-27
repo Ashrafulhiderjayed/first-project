@@ -10,6 +10,7 @@ import {
 } from './student/student.interface';
 import bcrypt from 'bcrypt';
 import config from '../config';
+import { boolean } from 'joi';
 
 // Schema for user's name
 const userNameSchema = new Schema<TUserName>({
@@ -143,6 +144,10 @@ const studentSchema = new Schema<TStudent, StudentModel>({
     },
     default: 'active',
   },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 // pre save middleware/hook : will work on create() and save()
@@ -158,6 +163,12 @@ studentSchema.pre('save', async function (next) {
 // post save middleware/hook
 studentSchema.post('save', function (doc, next) {
   doc.password = '';
+  next();
+});
+
+// Query middleware
+studentSchema.pre('find', function (next) {
+  console.log(this, 'Before finding the documents using Query middleware');
   next();
 });
 

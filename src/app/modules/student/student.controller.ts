@@ -48,8 +48,12 @@ const getAllStudents = async (req: Request, res: Response) => {
       message: 'All students fetched successfully',
       data: result,
     });
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'false',
+      message: error.message || 'Failed to fetch students',
+      error: error,
+    });
   }
 };
 

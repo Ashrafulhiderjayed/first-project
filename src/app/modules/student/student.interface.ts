@@ -39,6 +39,7 @@ export type TStudent = {
   localGuardian?: TLocalGuardian;
   profileImg?: string; // URL to the image
   isActive: 'active' | 'blocked'; // union type
+  isDeleted: boolean; // boolean type
 };
 
 // for creating static method
