@@ -173,6 +173,17 @@ studentSchema.pre('find', function (next) {
   next();
 });
 
+studentSchema.pre('aggregate', function (next){
+  console.log(this.pipeline(), 'Before aggregation using Query middleware');
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } }); // Exclude deleted documents
+  next();
+})
+
+studentSchema.pre('findOne', function (next){
+  this.find({ isDeleted: { $ne: true } }); // Exclude deleted documents
+  next();
+})
+
 //creating a custom static method
 studentSchema.statics.isUserExist = async function (id: string) {
   const existingUser = await Student.findOne({ id });
