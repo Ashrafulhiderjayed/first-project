@@ -168,7 +168,8 @@ studentSchema.post('save', function (doc, next) {
 
 // Query middleware
 studentSchema.pre('find', function (next) {
-  console.log(this, 'Before finding the documents using Query middleware');
+  // console.log(this, 'Before finding the documents using Query middleware');
+  this.find({ isDeleted: { $ne: true } }); // Exclude deleted documents
   next();
 });
 
