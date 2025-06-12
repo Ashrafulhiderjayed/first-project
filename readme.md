@@ -92,7 +92,7 @@ This project is a full-featured **Online Learning Management System (LMS)** desi
 
 
 ```
-- **🚀 Technologies Used**
+**🚀 Technologies Used**
   - Node.js / Express.js
   - MongoDB / Mongoose
   - JWT Authentication
