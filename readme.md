@@ -82,8 +82,111 @@ This project is a full-featured **Online Learning Management System (LMS)** desi
   "updatedAt": ""
 }
 
+```
+### 🎓 Student
+```json
+{
+  "_id": "",
+  "id": "",
+  "name": "",
+  "gender": "",
+  "dateOfBirth": "",
+  "email": "",
+  "contactNo": "",
+  "emergencyContactNo": "",
+  "presentAddress": "",
+  "permanentAddress": "",
+  "guardian": "",
+  "localGuardian": "",
+  "profileImage": "",
+  "admissionSemester": "",
+  "isDeleted": false,
+  "createdAt": "",
+  "updatedAt": ""
+}
+
+```
+### 👨‍🏫 Faculty
+```json
+{
+  "_id": "",
+  "id": "",
+  "designation": "",
+  "name": "",
+  "gender": "",
+  "dateOfBirth": "",
+  "email": "",
+  "contactNo": "",
+  "emergencyContactNo": "",
+  "presentAddress": "",
+  "permanentAddress": "",
+  "profileImage": "",
+  "academicFaculty": "",
+  "academicDepartment": "",
+  "isDeleted": false,
+  "createdAt": "",
+  "updatedAt": ""
+}
 
 
+```
+### 🧑‍💼 Admin
+```json
+{
+  "_id": "",
+  "id": "",
+  "designation": "",
+  "name": "",
+  "gender": "",
+  "dateOfBirth": "",
+  "email": "",
+  "contactNo": "",
+  "emergencyContactNo": "",
+  "presentAddress": "",
+  "permanentAddress": "",
+  "profileImage": "",
+  "managementDepartment": "",
+  "isDeleted": false,
+  "createdAt": "",
+  "updatedAt": ""
+}
+
+```
+### 📅 Academic Semester
+```json
+{
+  "_id": "",
+  "name": "",
+  "year": "",
+  "code": "",
+  "startMonth": "",
+  "endMonth": "",
+  "createdAt": "",
+  "updatedAt": ""
+}
+
+
+```
+### 🏫 Academic Faculty
+```json
+{
+  "_id": "",
+  "name": "",
+  "createdAt": "",
+  "updatedAt": ""
+}
+
+
+```
+### 🏢 Academic Department
+```json
+{
+  "_id": "",
+  "name": "",
+  "academicFaculty": "",
+  "createdAt": "",
+  "updatedAt": ""
+}
 
 
 
