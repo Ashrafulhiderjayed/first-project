@@ -188,13 +188,9 @@ This project is a full-featured **Online Learning Management System (LMS)** desi
   "updatedAt": ""
 }
 
-
-
-
-
-
-
 ```
+
+
 <!-- **🚀 Technologies Used** -->
 ## 🚀 Technologies Used
   - Node.js / Express.js
