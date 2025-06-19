@@ -7,9 +7,9 @@ import {
   TStudent,
   // StudentMethods,
   TUserName,
-} from './student/student.interface';
+} from './student.interface';
 import bcrypt from 'bcrypt';
-import config from '../config';
+import config from '../../config';
 import { boolean } from 'joi';
 
 // Schema for user's name
