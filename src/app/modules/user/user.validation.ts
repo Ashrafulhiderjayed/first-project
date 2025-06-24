@@ -5,8 +5,6 @@ const userValidationSchema = z.object({
     .string({invalid_type_error: 'Password must be a string'})
     .max(20, { message: 'Password must be less than 20 characters' })
     .optional(),
-  status: z.enum(['in-progress', 'blocked']).default('in-progress'),
-  isDeleted: z.boolean().optional().default(false), 
 });
 export const UserValidation = {
   userValidationSchema,
