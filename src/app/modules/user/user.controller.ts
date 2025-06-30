@@ -9,7 +9,7 @@ const createStudent = async (req: Request, res: Response) => {
     
     
     // const student = req.body.student; // get the data from request body
-    const { student: studentData } = req.body; // name Alias
+    const { password, student: studentData } = req.body; // name Alias
     
     
     const zodparsedData = studentValidationSchema.parse(studentData);
