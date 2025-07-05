@@ -17,6 +17,13 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
   // create a user 
   const result = await User.create(user);
 
+  // create a student 
+  if( Object.keys(result).length === 0 ){
+    // set id , _id as user
+    studentData.id = result.id;
+    studentData.user = result._id; // set user id as _id of user
+  }
+
   // const student = new Student(studentData); //creating instance of model
 
   // if(await student.isUserExist(studentData.id)){
