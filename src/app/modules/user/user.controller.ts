@@ -1,3 +1,5 @@
+import { UserServices } from "./user.service";
+
 const createStudent = async (req: Request, res: Response) => {
   try {
 
@@ -12,11 +14,14 @@ const createStudent = async (req: Request, res: Response) => {
     const { password, student: studentData } = req.body; // name Alias
     
     
-    const zodparsedData = studentValidationSchema.parse(studentData);
+    // const zodparsedData = studentValidationSchema.parse(studentData);
     
     
     //will call service function to send this data
-    const result = await StudentServices.createStudentIntoDB(zodparsedData);
+    const result = await UserServices.createStudentIntoDB(
+      password,
+      studentData
+    );
 
     // send response
     res.status(200).json({

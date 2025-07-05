@@ -1,9 +1,15 @@
+import config from "../../config";
+import { TStudent } from "../student/student.interface";
 import { User } from "./user.model";
 
-const createStudentIntoDB = async (studentData: TStudent) => {
-//   if (await Student.isUserExist(studentData.id)) {
-//     throw new Error('User already exists!');
-//   }
+const createStudentIntoDB = async (password: string, studentData: TStudent) => {
+ // create a user object
+  let user = {}
+
+  user.password = password || config.default_password; // if password is not provided, use default password
+
+ 
+
 
   const result = await User.create(studentData); //built in static method of mongoose
 
@@ -17,6 +23,6 @@ const createStudentIntoDB = async (studentData: TStudent) => {
   return result;
 };
 
-export const UserService = {
+export const UserServices = {
   createStudentIntoDB,
 };
