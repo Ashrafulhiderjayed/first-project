@@ -1,4 +1,4 @@
-import { Schema, model, connect, Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 //these are the sub-types of studentSchema
 export type TUserName = {
@@ -25,6 +25,7 @@ export type TLocalGuardian = {
 
 export type TStudent = {
   id: string;
+  user: Types.ObjectId; // reference to User model
   password: string;
   name: TUserName;
   gender: 'male' | 'female' | 'other'; //union type

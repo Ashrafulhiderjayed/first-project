@@ -1,21 +1,21 @@
 import config from "../../config";
 import { TStudent } from "../student/student.interface";
-import { NewUser } from "./user.interface";
+import { NewUser, TUser } from "./user.interface";
 import { User } from "./user.model";
 
 const createStudentIntoDB = async (password: string, studentData: TStudent) => {
  // create a user object
-  const user: NewUser = {}
+  const userData: Partial<TUser> = {}
 
-  user.password = password || config.default_password; // if password is not provided, use default password
+  userData.password = password || config.default_password; // if password is not provided, use default password
 
-  user.role = 'student'; // set role to student
+  userData.role = 'student'; // set role to student
 
   // set manually generated id
-  user.id = '2030100001';
+  userData.id = '2030100001';
 
   // create a user 
-  const result = await User.create(user);
+  const result = await User.create(userData);
 
   // create a student 
   if( Object.keys(result).length === 0 ){
