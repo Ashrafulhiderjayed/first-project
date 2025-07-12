@@ -15,13 +15,13 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
   userData.id = '2030100001';
 
   // create a user 
-  const result = await User.create(userData);
+  const newUser = await User.create(userData);
 
   // create a student 
-  if( Object.keys(result).length === 0 ){
+  if( Object.keys(newUser).length === 0 ){
     // set id , _id as user
-    studentData.id = result.id;
-    studentData.user = result._id; // set user id as _id of user
+    studentData.id = newUser.id;
+    studentData.user = newUser._id; // set user id as _id of user
   }
 
   // const student = new Student(studentData); //creating instance of model
@@ -31,7 +31,7 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
   // }
 
   // const result = await student.save(); //built in instance method of mongoose
-  return result;
+  return newUser;
 };
 
 export const UserServices = {
