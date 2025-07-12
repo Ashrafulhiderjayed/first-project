@@ -1,7 +1,22 @@
 import { Request, Response } from 'express';
 import { StudentServices } from './student.service';
 
-
+const getAllStudents = async (req: Request, res: Response) => {
+  try {
+    const result = await StudentServices.getAllStudentsFromDB();
+    res.status(200).json({
+      status: 'true',
+      message: 'All students fetched successfully',
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'false',
+      message: 'Failed to fetch students',
+      error: error,
+    });
+  }
+}
 
 const getSingleStudent = async (req: Request, res: Response) => {
   try{
@@ -45,7 +60,7 @@ const deleteStudent = async (req: Request, res: Response) => {
 };
 
 export const StudentControllers = {
-  createStudent,
+  getAllStudents,
   getSingleStudent,
   deleteStudent,
 };
