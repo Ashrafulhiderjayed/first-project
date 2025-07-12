@@ -142,15 +142,6 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'Local guardian information is required'],
     },
     profileImg: String,
-    isActive: {
-      type: String,
-      enum: {
-        values: ['active', 'inactive'],
-        message:
-          '{VALUE} is not valid. Status must be either active or inactive.',
-      },
-      default: 'active',
-    },
     isDeleted: {
       type: Boolean,
       default: false,
