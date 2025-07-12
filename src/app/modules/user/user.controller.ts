@@ -5,11 +5,6 @@ const createStudent = async (req: Request, res: Response) => {
 
     //creating a schema validation using Zod
     
-    
-    
-    
-    
-    
     // const student = req.body.student; // get the data from request body
     const { password, student: studentData } = req.body; // name Alias
     
@@ -39,19 +34,24 @@ const createStudent = async (req: Request, res: Response) => {
   }
 };
 
-const getAllStudents = async (req: Request, res: Response) => {
-  try {
-    const result = await StudentServices.getAllStudentsFromDB();
-    res.status(200).json({
-      status: 'true',
-      message: 'All students fetched successfully',
-      data: result,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      status: 'false',
-      message: error.message || 'Failed to fetch students',
-      error: error,
-    });
-  }
-};
+// const getAllStudents = async (req: Request, res: Response) => {
+//   try {
+//     const result = await StudentServices.getAllStudentsFromDB();
+//     res.status(200).json({
+//       status: 'true',
+//       message: 'All students fetched successfully',
+//       data: result,
+//     });
+//   } catch (error: any) {
+//     res.status(500).json({
+//       status: 'false',
+//       message: error.message || 'Failed to fetch students',
+//       error: error,
+//     });
+//   }
+// };
+
+export const UserControllers = {
+  createStudent,
+  // getAllStudents,
+}
